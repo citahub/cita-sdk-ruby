@@ -1,4 +1,4 @@
-# Nervos
+# Nervos.rb
 
 Nervos AppChain Ruby SDK
 
