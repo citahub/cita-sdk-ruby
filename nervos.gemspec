@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Ruby Nervos AppChain SDK}
   spec.description   = %q{Ruby Nervos AppChain SDK for signature and rpc call}
-  spec.homepage      = "https://github.com/classicalliu/nervos.rb"
+  spec.homepage      = "https://github.com/cryptape/nervos.rb"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -35,4 +35,10 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.16"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency "pry", "~> 0.11"
+  spec.add_development_dependency "awesome_print", "~> 1.8"
+
+  spec.add_dependency "google-protobuf", "~> 3.6"
+  spec.add_dependency "ciri-crypto", "0.1.1"
+  # spec.add_dependency "awesome_print", "~> 1.8"
 end
