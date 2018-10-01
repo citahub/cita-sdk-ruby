@@ -1,5 +1,7 @@
 # NApp.rb
 
+[![Build Status](https://travis-ci.org/cryptape/napp.rb.svg?branch=master)](https://travis-ci.org/cryptape/napp.rb)
+
 Nervos AppChain Ruby SDK
 
 ## Installation
