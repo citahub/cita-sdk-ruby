@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Ruby Nervos AppChain SDK}
   spec.description   = %q{Ruby Nervos AppChain SDK for signature and rpc call}
-  spec.homepage      = "https://github.com/cryptape/nervos.rb"
+  spec.homepage      = "https://github.com/cryptape/napp.rb"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
