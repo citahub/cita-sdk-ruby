@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    nervos.rb (0.1.0)
+    napp.rb (0.1.0)
       ciri-crypto (= 0.1.1)
       google-protobuf (~> 3.6)
 
@@ -46,7 +46,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print (~> 1.8)
   bundler (~> 1.16)
-  nervos.rb!
+  napp.rb!
   pry (~> 0.11)
   rake (~> 10.0)
   rspec (~> 3.0)

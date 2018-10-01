@@ -1,4 +1,4 @@
-module Nervos
+module NApp
   class Address
     # @param str [String]
     def initialize(str)
@@ -14,7 +14,7 @@ module Nervos
 
     # compare address is equal
     #
-    # @param other [Nervos::Address]
+    # @param other [NApp::Address]
     def ==(other)
       addr.casecmp(other.addr)
     end
