@@ -17,7 +17,7 @@ module Nervos
       # @param hex [String]
       def remove_hex_prefix(hex)
         return if hex.nil?
-        return hex.delete_prefix(HEX_PREFIX) if hex.start_with?(HEX_PREFIX)
+        return hex.gsub(HEX_PREFIX, "") if hex.start_with?(HEX_PREFIX)
         hex
       end
 
