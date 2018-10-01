@@ -1,25 +1,25 @@
-RSpec.describe Nervos::Utils do
+RSpec.describe NApp::Utils do
   context "add_hex_prefix" do
     it "without prefix" do
       hex = "124"
-      expect(Nervos::Utils.add_hex_prefix(hex)).to eq "0x#{hex}"
+      expect(NApp::Utils.add_hex_prefix(hex)).to eq "0x#{hex}"
     end
 
     it "with prefix" do
       hex = "0x124"
-      expect(Nervos::Utils.add_hex_prefix(hex)).to eq hex
+      expect(NApp::Utils.add_hex_prefix(hex)).to eq hex
     end
   end
 
   context "remove_hex_prefix" do
     it "with prefix" do
       hex = "0x124"
-      expect(Nervos::Utils.remove_hex_prefix(hex)).to eq "124"
+      expect(NApp::Utils.remove_hex_prefix(hex)).to eq "124"
     end
 
     it "without prefix" do
       hex = "124"
-      expect(Nervos::Utils.remove_hex_prefix(hex)).to eq hex
+      expect(NApp::Utils.remove_hex_prefix(hex)).to eq hex
     end
   end
 
@@ -27,7 +27,7 @@ RSpec.describe Nervos::Utils do
     it "correct" do
       decimal = 100
       hex = "64"
-      expect(Nervos::Utils.to_hex(decimal)).to eq "0x#{hex}"
+      expect(NApp::Utils.to_hex(decimal)).to eq "0x#{hex}"
     end
   end
 
@@ -36,14 +36,14 @@ RSpec.describe Nervos::Utils do
       hex = "64"
       decimal = 100
 
-      expect(Nervos::Utils.to_decimal(hex)).to eq decimal
+      expect(NApp::Utils.to_decimal(hex)).to eq decimal
     end
 
     it "with prefix" do
       hex = "0x64"
       decimal = 100
 
-      expect(Nervos::Utils.to_decimal(hex)).to eq decimal
+      expect(NApp::Utils.to_decimal(hex)).to eq decimal
     end
   end
 
@@ -52,23 +52,23 @@ RSpec.describe Nervos::Utils do
       str = "0124"
       bytes = [str].pack("H*")
 
-      expect(Nervos::Utils.to_bytes(str)).to eq bytes
+      expect(NApp::Utils.to_bytes(str)).to eq bytes
     end
 
     it "with prefix" do
       str = "0x0124"
       bytes = ["0124"].pack("H*")
 
-      expect(Nervos::Utils.to_bytes(str)).to eq bytes
+      expect(NApp::Utils.to_bytes(str)).to eq bytes
     end
   end
 
   context "from_bytes" do
     it "correct" do
       str = "0x0124"
-      bytes = Nervos::Utils.to_bytes(str)
+      bytes = NApp::Utils.to_bytes(str)
 
-      expect(Nervos::Utils.from_bytes(bytes)).to eq str
+      expect(NApp::Utils.from_bytes(bytes)).to eq str
     end
   end
 end

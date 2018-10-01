@@ -1,4 +1,4 @@
-module Nervos
+module NApp
   class Utils
     HEX_PREFIX = "0x"
 
@@ -43,7 +43,7 @@ module Nervos
       # @param str [String] normal string
       # @return [String] byte code string
       def to_bytes(str)
-        [Nervos::Utils.remove_hex_prefix(str)].pack("H*")
+        [NApp::Utils.remove_hex_prefix(str)].pack("H*")
       end
 
       # byte code to string value, with `0x` prefix
@@ -51,7 +51,7 @@ module Nervos
       # @param bytes_str [String] byte code string
       # @return [String] normal string
       def from_bytes(bytes_str)
-        Nervos::Utils.add_hex_prefix(bytes_str.unpack1("H*"))
+        NApp::Utils.add_hex_prefix(bytes_str.unpack1("H*"))
       end
     end
   end

@@ -1,4 +1,4 @@
-# Nervos.rb
+# NApp.rb
 
 Nervos AppChain Ruby SDK
 
@@ -7,7 +7,7 @@ Nervos AppChain Ruby SDK
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'nervos.rb', github: "cryptape/napp.rb"
+gem 'napp.rb', github: "cryptape/napp.rb"
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install nervos.rb
+    $ gem install napp.rb
 
 ## Contributing
 
@@ -28,4 +28,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the nervos.rb project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/cryptape/napp.rb/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the napp.rb project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/cryptape/napp.rb/blob/master/CODE_OF_CONDUCT.md).

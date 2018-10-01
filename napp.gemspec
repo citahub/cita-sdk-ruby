@@ -1,11 +1,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "nervos/version"
+require "napp/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "nervos.rb"
-  spec.version       = Nervos::VERSION
+  spec.name          = "napp.rb"
+  spec.version       = NApp::VERSION
   spec.authors       = ["classicalliu"]
   spec.email         = ["classicalliu@gmail.com"]
 
@@ -40,5 +40,4 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "google-protobuf", "~> 3.6"
   spec.add_dependency "ciri-crypto", "0.1.1"
-  # spec.add_dependency "awesome_print", "~> 1.8"
 end

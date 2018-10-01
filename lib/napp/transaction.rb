@@ -1,4 +1,4 @@
-module Nervos
+module NApp
   class Transaction
     attr_accessor :to, :nonce, :quota, :valid_until_block, :data, :value, :chain_id, :version
 
