@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NApp
   class Utils
     HEX_PREFIX = "0x"
@@ -9,6 +11,7 @@ module NApp
       def add_hex_prefix(hex)
         return if hex.nil?
         return hex if hex.start_with?(HEX_PREFIX)
+
         HEX_PREFIX + hex
       end
 
@@ -18,6 +21,7 @@ module NApp
       def remove_hex_prefix(hex)
         return if hex.nil?
         return hex.gsub(HEX_PREFIX, "") if hex.start_with?(HEX_PREFIX)
+
         hex
       end
 

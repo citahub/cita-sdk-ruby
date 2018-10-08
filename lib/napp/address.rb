@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NApp
   class Address
     # @param str [String]

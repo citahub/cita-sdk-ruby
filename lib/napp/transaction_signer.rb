@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "ciri/utils"
 require "ciri/crypto"
 
@@ -36,7 +38,6 @@ module NApp
         NApp::Utils.from_bytes(encoded_unverified_tx)
       end
 
-
       # unsign transaction
       #
       # @param tx_content [String] hex string
@@ -71,9 +72,8 @@ module NApp
       # @param value [String] hex string with or without `0x` prefix
       # @return [String] byte code string
       def process_value(value)
-        NApp::Utils.to_bytes(NApp::Utils.remove_hex_prefix(value).rjust(64, '0'))
+        NApp::Utils.to_bytes(NApp::Utils.remove_hex_prefix(value).rjust(64, "0"))
       end
-
     end
   end
 end

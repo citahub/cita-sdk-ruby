@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "napp/version"
 
 module NApp
