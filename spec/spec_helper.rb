@@ -1,5 +1,7 @@
 require "bundler/setup"
 require "napp"
+require "awesome_print"
+require "pry"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
