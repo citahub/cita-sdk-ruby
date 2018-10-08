@@ -2,7 +2,7 @@ require "napp/version"
 
 module NApp
   # Your code goes here...
-  require "protos/blockchain_pb"
+  require "napp/protos/blockchain_pb"
 
   require "napp/address"
   require "napp/transaction"

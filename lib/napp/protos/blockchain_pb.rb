@@ -89,7 +89,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
 end
 
-module Protos
+module NApp::Protos
   Proof = Google::Protobuf::DescriptorPool.generated_pool.lookup("Proof").msgclass
   BlockHeader = Google::Protobuf::DescriptorPool.generated_pool.lookup("BlockHeader").msgclass
   Status = Google::Protobuf::DescriptorPool.generated_pool.lookup("Status").msgclass

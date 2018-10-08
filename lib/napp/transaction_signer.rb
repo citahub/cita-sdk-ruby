@@ -9,7 +9,7 @@ module NApp
       # @param transaction [NApp::Transaction]
       # @param private_key [String]
       def encode(transaction, private_key)
-        tx = Protos::Transaction.new
+        tx = NApp::Protos::Transaction.new
 
         tx.nonce = transaction.nonce
         to = NApp::Utils.remove_hex_prefix(transaction.to)&.downcase
