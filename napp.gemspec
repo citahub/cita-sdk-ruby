@@ -41,4 +41,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "google-protobuf", "~> 3.6"
   spec.add_dependency "ciri-crypto", "0.1.1"
+  spec.add_dependency "faraday", "~> 0.15.3"
+  spec.add_dependency "activesupport", "~> 5.2.1"
 end

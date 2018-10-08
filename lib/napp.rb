@@ -10,4 +10,7 @@ module NApp
   require "napp/transaction"
   require "napp/transaction_signer"
   require "napp/utils"
+  require "napp/http"
+  require "napp/rpc"
+  require "napp/client"
 end
