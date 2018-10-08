@@ -8,7 +8,7 @@ module NApp
       #
       # @param transaction [NApp::Transaction]
       # @param private_key [String]
-      def encode(transaction:, private_key:)
+      def encode(transaction, private_key)
         tx = Protos::Transaction.new
 
         tx.nonce = transaction.nonce
@@ -25,7 +25,7 @@ module NApp
 
         private_key_bytes = NApp::Utils.to_bytes(private_key)
 
-        protobuf_hash = Ciri::Utils.keccak(encoded_tx)
+        protobuf_hash = Utils.keccak256(encoded_tx)
 
         signature = Ciri::Crypto.ecdsa_signature(private_key_bytes, protobuf_hash).signature
 
@@ -34,6 +34,36 @@ module NApp
         encoded_unverified_tx = Protos::UnverifiedTransaction.encode(unverified_tx)
 
         NApp::Utils.from_bytes(encoded_unverified_tx)
+      end
+
+
+      # unsign transaction
+      #
+      # @param tx_content [String] hex string
+      def decode(tx_content)
+        content_bytes = NApp::Utils.to_bytes(tx_content)
+        unverified_transaction = Protos::UnverifiedTransaction.decode(content_bytes)
+
+        signature = unverified_transaction["signature"]
+
+        transaction = unverified_transaction["transaction"]
+        msg = Protos::Transaction.encode(transaction)
+        msg_hash = NApp::Utils.keccak256(msg)
+        pubkey = Ciri::Crypto.ecdsa_recover(msg_hash, signature)
+        pubkey_hex = Utils.from_bytes(pubkey[1..-1])
+
+        from_address = Utils.keccak256(pubkey[1..-1])[-20..-1]
+        from_address_hex = Utils.from_bytes(from_address)
+
+        sender = {
+          "address" => from_address_hex,
+          "public_key" => pubkey_hex
+        }
+
+        {
+          "unverified_transaction" => unverified_transaction,
+          "sender" => sender
+        }
       end
 
       private

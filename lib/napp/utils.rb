@@ -53,6 +53,12 @@ module NApp
       def from_bytes(bytes_str)
         NApp::Utils.add_hex_prefix(bytes_str.unpack1("H*"))
       end
+
+      # keccak 256 hash
+      #
+      def keccak256(*data)
+        Ciri::Utils.keccak(*data)
+      end
     end
   end
 end
