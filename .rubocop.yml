@@ -55,21 +55,6 @@ Metrics/PerceivedComplexity:
 Naming/MemoizedInstanceVariableName:
   Enabled: false
 
-Rails:
-  Enabled: true
-
-Rails/HasAndBelongsToMany:
-  Enabled: false
-
-Rails/SkipsModelValidations:
-  Enabled: false
-
-Rails/HttpStatus:
-  Enabled: false
-
-Rails/HasManyOrHasOneDependent:
-  Enabled: false
-
 Style/CollectionMethods:
   Enabled: true
   PreferredMethods:
