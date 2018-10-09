@@ -52,5 +52,27 @@ module NApp
       resp = http.call_rpc(method, params: params, jsonrpc: jsonrpc, id: id)
       JSON.parse(resp.body)
     end
+
+    # @param transaction [NApp::Transaction]
+    # @return [Hash]
+    def send_transaction(transaction, private_key)
+      content = TransactionSigner.encode(transaction, private_key)
+      send_raw_transaction(content)
+    end
+
+    # easy to transfer tokens
+    #
+    # @param to [String] to address
+    # @param private_key [String]
+    # @param value [String | Integer] hex string or decimal integer
+    # @param quota [Integer] default to 30_000
+    #
+    # @return [Hash]
+    def transfer(to:, private_key:, value:, quota: 30_000)
+      valid_until_block = block_number["result"].hex + 88
+      chain_id = get_meta_data("latest").dig "result", "chainId"
+      transaction = Transaction.new(nonce: Utils.nonce, valid_until_block: valid_until_block, chain_id: chain_id, to: to, value: value, quota: quota)
+      send_transaction(transaction, private_key)
+    end
   end
 end

@@ -63,6 +63,13 @@ module NApp
       def keccak256(*data)
         Ciri::Utils.keccak(*data)
       end
+
+      # get nonce
+      #
+      # @return [String]
+      def nonce
+        SecureRandom.hex
+      end
     end
   end
 end
