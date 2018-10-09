@@ -10,7 +10,7 @@ module NApp
     # @param version [Integer]
     # @param to [String]
     # @param data [String]
-    # @param value: [String] hex string
+    # @param value: [String | Integer] hex string or decimal integer
     # @param quota [Integer]
     #
     # @return [void]
@@ -20,9 +20,13 @@ module NApp
       @quota = quota
       @valid_until_block = valid_until_block
       @data = data
-      @value = value
       @chain_id = chain_id
       @version = version
+      @value = if value.is_a?(Integer)
+                 Utils.to_hex(value)
+               else
+                 value
+               end
     end
   end
 end

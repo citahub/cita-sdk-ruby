@@ -23,6 +23,13 @@ RSpec.describe NApp::TransactionSigner do
         result = NApp::TransactionSigner.encode(tx, private_key)
         expect(result).to eq content
       end
+
+      it "decimal value" do
+        tx_hash[:value] = 1000
+        tx = NApp::Transaction.new(tx_hash)
+        result = NApp::TransactionSigner.encode(tx, private_key)
+        expect(result).to eq content
+      end
     end
 
     context "with data" do
