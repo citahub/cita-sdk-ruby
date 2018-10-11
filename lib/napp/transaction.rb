@@ -28,5 +28,20 @@ module NApp
                  value
                end
     end
+
+    def self.from_hash(hash)
+      h = hash.map { |k, v| { k.to_sym => v } }.reduce({}, :merge)
+
+      new(
+        nonce: h[:nonce],
+        valid_until_block: h[:valid_until_block],
+        chain_id: h[:chain_id],
+        to: h[:to],
+        data: h[:data],
+        version: h[:version] || 0,
+        value: h[:value] || "0",
+        quota: h[:quota] || 1_000_000
+      )
+    end
   end
 end
