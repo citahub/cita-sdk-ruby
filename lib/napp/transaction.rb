@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module NApp
   class Transaction
     attr_accessor :to, :nonce, :quota, :valid_until_block, :data, :value, :chain_id, :version
@@ -8,18 +10,23 @@ module NApp
     # @param version [Integer]
     # @param to [String]
     # @param data [String]
-    # @param value: [String] hex string
+    # @param value: [String | Integer] hex string or decimal integer
     # @param quota [Integer]
+    #
+    # @return [void]
     def initialize(nonce:, valid_until_block:, chain_id:, version: 0, to: nil, data: nil, value: "0", quota: 1_000_000)
       @to = to
       @nonce = nonce
       @quota = quota
       @valid_until_block = valid_until_block
       @data = data
-      @value = value
       @chain_id = chain_id
       @version = version
+      @value = if value.is_a?(Integer)
+                 Utils.to_hex(value)
+               else
+                 value
+               end
     end
-
   end
 end

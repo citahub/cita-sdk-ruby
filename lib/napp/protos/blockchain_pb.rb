@@ -48,7 +48,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "UnverifiedTransaction" do
     optional :transaction, :message, 1, "Transaction"
     optional :signature, :bytes, 2
-    optional :'crypto.rb', :enum, 3, "Crypto"
+    optional :crypto, :enum, 3, "Crypto"
   end
   add_message "SignedTransaction" do
     optional :transaction_with_sig, :message, 1, "UnverifiedTransaction"
@@ -89,7 +89,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
 end
 
-module Protos
+module NApp::Protos
   Proof = Google::Protobuf::DescriptorPool.generated_pool.lookup("Proof").msgclass
   BlockHeader = Google::Protobuf::DescriptorPool.generated_pool.lookup("BlockHeader").msgclass
   Status = Google::Protobuf::DescriptorPool.generated_pool.lookup("Status").msgclass
