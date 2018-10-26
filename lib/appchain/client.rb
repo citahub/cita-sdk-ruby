@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module NApp
+module AppChain
   class Client
     attr_reader :url, :rpc, :http, :contract
 

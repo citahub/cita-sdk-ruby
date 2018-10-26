@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "napp"
+require "appchain"
 require "awesome_print"
 require "pry"
 
