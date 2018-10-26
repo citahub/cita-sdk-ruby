@@ -2,7 +2,7 @@
 require "json"
 require "faraday"
 
-module NApp
+module AppChain
   class Http
     attr_accessor :url
 

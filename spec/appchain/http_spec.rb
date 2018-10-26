@@ -1,6 +1,6 @@
-RSpec.describe NApp::Http do
+RSpec.describe AppChain::Http do
   let(:url) { "http://www.example.com" }
-  let(:http) { NApp::Http.new(url) }
+  let(:http) { AppChain::Http.new(url) }
 
   def change_hash_keys(hash, method = :to_s)
     hash.map(&-> (k, v) { {k.send(method) => v} }).reduce({}, :merge)
@@ -19,10 +19,10 @@ RSpec.describe NApp::Http do
     let(:params) { ["0x0"] }
     let(:default_params) do
       {
-        jsonrpc: NApp::Http::DEFAULT_JSONRPC,
-        id: NApp::Http::DEFAULT_ID,
+        jsonrpc: AppChain::Http::DEFAULT_JSONRPC,
+        id: AppChain::Http::DEFAULT_ID,
         method: method,
-        params: NApp::Http::DEFAULT_PARAMS
+        params: AppChain::Http::DEFAULT_PARAMS
       }
     end
 
