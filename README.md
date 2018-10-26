@@ -1,6 +1,7 @@
 # AppChain.rb
 
 [![Build Status](https://travis-ci.org/cryptape/appchain.rb.svg?branch=master)](https://travis-ci.org/cryptape/appchain.rb)
+[![Documentation](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](https://www.rubydoc.info/github/cryptape/appchain.rb/master)
 
 Nervos AppChain Ruby SDK
 
