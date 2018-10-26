@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module NApp
+module AppChain
   class Address
     # @param str [String]
     def initialize(str)
@@ -16,7 +16,7 @@ module NApp
 
     # compare address is equal
     #
-    # @param other [NApp::Address]
+    # @param other [AppChain::Address]
     def ==(other)
       addr.casecmp(other.addr)
     end

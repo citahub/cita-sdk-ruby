@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module NApp
+module AppChain
   class Utils
     HEX_PREFIX = "0x"
 
@@ -47,7 +47,7 @@ module NApp
       # @param str [String] normal string
       # @return [String] byte code string
       def to_bytes(str)
-        [NApp::Utils.remove_hex_prefix(str)].pack("H*")
+        [AppChain::Utils.remove_hex_prefix(str)].pack("H*")
       end
 
       # byte code to string value, with `0x` prefix
@@ -55,7 +55,7 @@ module NApp
       # @param bytes_str [String] byte code string
       # @return [String] normal string
       def from_bytes(bytes_str)
-        NApp::Utils.add_hex_prefix(bytes_str.unpack1("H*"))
+        AppChain::Utils.add_hex_prefix(bytes_str.unpack1("H*"))
       end
 
       # keccak 256 hash

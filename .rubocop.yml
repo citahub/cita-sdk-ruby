@@ -6,10 +6,10 @@ AllCops:
   - 'Rakefile'
   - 'Gemfile'
   - 'Gemfile.lock'
-  - 'napp.gemspec'
+  - 'appchain.gemspec'
   - 'cita-proto/**/*'
   - 'secp256k1/**/*'
-  - 'lib/napp/protos/**/*'
+  - 'lib/appchain/protos/**/*'
 
 Bundler/OrderedGems:
   Enabled: false
