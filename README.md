@@ -65,6 +65,15 @@ transfer tokens
 appchain.rpc.transfer(to: "to address", value: 1000, private_key)
 ```
 
+contract
+```ruby
+contract = appchain.contract_at(abi, contract_address)
+# for rpc call (constant functions)
+response = contract.call_func(method: :symbol)
+# for rpc sendTransaction
+response = contract.send_func(tx: tx, private_key: private_key, method: :transfer, params: [address, tokens])
+```
+
 
 ## Contributing
 
