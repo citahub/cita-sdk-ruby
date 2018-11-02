@@ -45,8 +45,8 @@ transaction = AppChain::Transaction.new(
   valid_until_block: 1882078,
   data: "",
   value: "0x3e8",
-  chain_id: 1,
-  version: 0
+  chain_id: "1",
+  version: 1
 )
 
 # sign transaction with your private key
@@ -75,6 +75,15 @@ response = contract.call_func(method: :symbol)
 response = contract.send_func(tx: tx, private_key: private_key, method: :transfer, params: [address, tokens])
 ```
 
+## CHANGELOG
+
+### v0.1
+    - supports CITA 0.19
+
+### 0.2 
+    - supports CITA 0.20 and 0.19
+    - set default transaction version to 1
+    - update TransactionSinger.decode output type to hash with symbol keys
 
 ## Contributing
 

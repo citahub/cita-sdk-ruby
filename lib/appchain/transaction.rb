@@ -2,6 +2,9 @@
 
 module AppChain
   class Transaction
+    class VersionError < StandardError
+    end
+
     attr_accessor :to, :nonce, :quota, :valid_until_block, :data, :value, :chain_id, :version
 
     # @param nonce [String]
@@ -14,7 +17,9 @@ module AppChain
     # @param quota [Integer]
     #
     # @return [void]
-    def initialize(nonce:, valid_until_block:, chain_id:, version: 0, to: nil, data: nil, value: "0", quota: 1_000_000)
+    def initialize(nonce:, valid_until_block:, chain_id:, version: 1, to: nil, data: nil, value: "0", quota: 1_000_000)
+      raise VersionError, "transaction version error, expected 0 or 1, got #{version}" unless [0, 1].include?(version)
+
       @to = to
       @nonce = nonce
       @quota = quota
@@ -38,7 +43,7 @@ module AppChain
         chain_id: h[:chain_id],
         to: h[:to],
         data: h[:data],
-        version: h[:version] || 0,
+        version: h[:version] || 1,
         value: h[:value] || "0",
         quota: h[:quota] || 1_000_000
       )
