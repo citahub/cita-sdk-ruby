@@ -26,7 +26,7 @@ module AppChain
           tx.to = to unless to.nil?
           tx.chain_id = transaction.chain_id
         elsif transaction.version == 1
-          tx.to_v1 = hex_to_bytes(to, 40) unless to.nil?
+          tx.to_v1 = Utils.to_bytes(to) unless to.nil?
           tx.chain_id_v1 = hex_to_bytes(transaction.chain_id)
         end
 
