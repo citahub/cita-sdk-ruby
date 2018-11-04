@@ -78,12 +78,14 @@ response = contract.send_func(tx: tx, private_key: private_key, method: :transfe
 ## CHANGELOG
 
 ### v0.1
-    - supports CITA 0.19
 
-### 0.2 
-    - supports CITA 0.20 and 0.19
-    - set default transaction version to 1
-    - update TransactionSinger.decode output type to hash with symbol keys
+* supports CITA 0.19
+
+### 0.2
+ 
+* supports CITA 0.20 and 0.19
+* set default transaction version to 1
+* update TransactionSinger.decode output type to hash with symbol keys
 
 ## Contributing
 
