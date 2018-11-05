@@ -15,6 +15,15 @@ module AppChain
         HEX_PREFIX + hex
       end
 
+      # add `0x` prefix to not blank hex string
+      #
+      # @param hex [String]
+      def add_prefix_for_not_blank(hex)
+        return add_hex_prefix(hex) unless hex.blank?
+
+        hex
+      end
+
       # remove `0x` prefix from hex string
       #
       # @param hex [String]
@@ -55,7 +64,10 @@ module AppChain
       # @param bytes_str [String] byte code string
       # @return [String] normal string
       def from_bytes(bytes_str)
-        AppChain::Utils.add_hex_prefix(bytes_str.unpack1("H*"))
+        hex = bytes_str.unpack1("H*")
+        return AppChain::Utils.add_hex_prefix(hex) unless hex.blank?
+
+        hex
       end
 
       # keccak 256 hash

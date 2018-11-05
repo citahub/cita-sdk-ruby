@@ -75,15 +75,16 @@ module AppChain
       end
 
       # decode and support forks
+      #
       # @param tx_content [String] hex string
       # @return [Hash]
-      def decode(tx_content)
+      def original_decode(tx_content)
         data = simple_decode(tx_content)
         utx = data[:unverified_transaction]
         tx = utx[:transaction]
         version = tx[:version]
 
-        if version.zero?
+        if version == 0 # rubocop:disable Style/NumericPredicate
           tx.delete(:to_v1)
           tx.delete(:chain_id_v1)
         elsif version == 1
@@ -91,6 +92,33 @@ module AppChain
           tx[:chain_id] = tx.delete(:chain_id_v1)
         else
           raise Transaction::VersionError, "transaction version error, expected 0 or 1, got #{version}"
+        end
+
+        data
+      end
+
+      # decode and parse bytes to hex string
+      #
+      # @param tx_content [String] hex string
+      # @return [Hash]
+      def decode(tx_content)
+        data = original_decode(tx_content)
+        utx = data[:unverified_transaction]
+        tx = utx[:transaction]
+        version = tx[:version]
+
+        tx[:value] = Utils.from_bytes(tx[:value])
+        tx[:data] = Utils.from_bytes(tx[:data])
+        tx[:nonce] = Utils.add_prefix_for_not_blank(tx[:nonce])
+        utx[:signature] = Utils.from_bytes(utx[:signature])
+
+        if version == 0 # rubocop:disable Style/NumericPredicate
+          tx.delete(:to_v1)
+          tx.delete(:chain_id_v1)
+          tx[:to] = Utils.add_prefix_for_not_blank(tx[:to])
+        elsif version == 1
+          tx[:to] = Utils.from_bytes(tx[:to])
+          tx[:chain_id] = Utils.from_bytes(tx[:chain_id])
         end
 
         data
