@@ -3,9 +3,9 @@ sudo: false
 language: ruby
 cache: bundler
 rvm:
-  - 2.4.4
-  - 2.5.1
-before_install: gem install bundler -v 1.16.4
+  - 2.4.5
+  - 2.5.3
+before_install: gem install bundler -v 1.16.6
 install:
   - cd secp256k1 && ./autogen.sh && ./configure --enable-module-recovery --enable-experimental --enable-module-ecdh && make && sudo make install && cd ..
   - bundle install
