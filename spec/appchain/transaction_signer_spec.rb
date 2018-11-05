@@ -82,15 +82,24 @@ RSpec.describe AppChain::TransactionSigner do
       }
     end
 
-    it "correct" do
-      data = AppChain::TransactionSigner.decode(content)
+    it "original decode" do
+      data = AppChain::TransactionSigner.original_decode(content)
 
       expect(data[:unverified_transaction][:transaction]).to eq expect_data[:unverified_transaction][:transaction]
       expect(data[:unverified_transaction][:crypto]).to eq expect_data[:unverified_transaction][:crypto]
       expect(data[:sender]).to eq expect_data[:sender]
     end
 
+    it "decode" do
+      output = AppChain::TransactionSigner.decode(content)
+      utx = output[:unverified_transaction]
+      tx = utx[:transaction]
 
+      expect(tx[:to]).to eq ""
+      expect(tx[:data]).to eq "0x#{data}"
+      expect(tx[:value]).to eq "0x#{expect_data[:unverified_transaction][:transaction][:value].unpack1("H*")}"
+      expect(utx[:signature]).to eq "0x#{expect_data[:unverified_transaction][:signature].unpack1("H*")}"
+    end
   end
 
 
@@ -172,12 +181,23 @@ RSpec.describe AppChain::TransactionSigner do
           }
         end
 
-        it "correct" do
-          data = AppChain::TransactionSigner.decode(content)
+        it "original decode" do
+          data = AppChain::TransactionSigner.original_decode(content)
 
           expect(data[:unverified_transaction][:transaction].to_h).to eq expected_data[:unverified_transaction][:transaction]
           expect(data[:unverified_transaction][:crypto]).to eq expected_data[:unverified_transaction][:crypto]
           expect(data[:sender]).to eq expected_data[:sender]
+        end
+
+        it "decode" do
+          output = AppChain::TransactionSigner.decode(content)
+          utx = output[:unverified_transaction]
+          tx = utx[:transaction]
+
+          expect(tx[:to]).to eq "0x#{expected_data[:unverified_transaction][:transaction][:to]}"
+          expect(tx[:data]).to eq ""
+          expect(tx[:value]).to eq "0x#{expected_data[:unverified_transaction][:transaction][:value].unpack1("H*")}"
+          expect(utx[:signature]).to eq "0x#{expected_data[:unverified_transaction][:signature].unpack1("H*")}"
         end
       end
 
@@ -207,12 +227,23 @@ RSpec.describe AppChain::TransactionSigner do
           }
         end
 
-        it "success" do
-          data = AppChain::TransactionSigner.decode(content)
+        it "original decode" do
+          data = AppChain::TransactionSigner.original_decode(content)
 
           expect(data[:unverified_transaction][:transaction].to_h).to eq expected_data[:unverified_transaction][:transaction]
           expect(data[:unverified_transaction][:crypto]).to eq expected_data[:unverified_transaction][:crypto]
           expect(data[:sender]).to eq expected_data[:sender]
+        end
+
+        it "decode" do
+          output = AppChain::TransactionSigner.decode(content)
+          utx = output[:unverified_transaction]
+          tx = utx[:transaction]
+
+          expect(tx[:to]).to eq "0x#{expected_data[:unverified_transaction][:transaction][:to].unpack1("H*")}"
+          expect(tx[:data]).to eq ""
+          expect(tx[:value]).to eq "0x#{expected_data[:unverified_transaction][:transaction][:value].unpack1("H*")}"
+          expect(utx[:signature]).to eq "0x#{expected_data[:unverified_transaction][:signature].unpack1("H*")}"
         end
       end
     end

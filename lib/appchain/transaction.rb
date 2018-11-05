@@ -10,7 +10,7 @@ module AppChain
 
     # @param nonce [String] default is SecureRandom.hex; if you provide with nil or empty string, it will be assigned a random string.
     # @param valid_until_block [Integer]
-    # @param chain_id [Integer]
+    # @param chain_id [Integer | String] hex string if version == 1
     # @param version [Integer]
     # @param to [String]
     # @param data [String]
@@ -26,7 +26,11 @@ module AppChain
       @quota = quota
       @valid_until_block = valid_until_block
       @data = data
-      @chain_id = chain_id
+      @chain_id = if chain_id.is_a?(String)
+                    chain_id.delete("-")
+                  else
+                    chain_id
+                  end
       @version = version
       @value = if value.is_a?(Integer)
                  Utils.to_hex(value)
