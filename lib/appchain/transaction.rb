@@ -8,7 +8,7 @@ module AppChain
 
     attr_accessor :to, :nonce, :quota, :valid_until_block, :data, :value, :chain_id, :version
 
-    # @param nonce [String] default is SecureRandom.hex, if you filled with nil or "", will set to random string
+    # @param nonce [String] default is SecureRandom.hex; if you provide with nil or empty string, it will be assigned a random string.
     # @param valid_until_block [Integer]
     # @param chain_id [Integer]
     # @param version [Integer]
