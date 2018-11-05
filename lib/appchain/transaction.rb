@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require "active_support/core_ext/string"
 
 module AppChain
   class Transaction
@@ -7,7 +8,7 @@ module AppChain
 
     attr_accessor :to, :nonce, :quota, :valid_until_block, :data, :value, :chain_id, :version
 
-    # @param nonce [String]
+    # @param nonce [String] default is SecureRandom.hex, if you filled with nil or "", will set to random string
     # @param valid_until_block [Integer]
     # @param chain_id [Integer]
     # @param version [Integer]
@@ -17,11 +18,11 @@ module AppChain
     # @param quota [Integer]
     #
     # @return [void]
-    def initialize(nonce:, valid_until_block:, chain_id:, version: 1, to: nil, data: nil, value: "0", quota: 1_000_000)
+    def initialize(valid_until_block:, chain_id:, nonce: nil, version: 1, to: nil, data: nil, value: "0", quota: 1_000_000) # rubocop:disable Metrics/ParameterLists
       raise VersionError, "transaction version error, expected 0 or 1, got #{version}" unless [0, 1].include?(version)
 
       @to = to
-      @nonce = nonce
+      @nonce = nonce.blank? ? SecureRandom.hex : nonce
       @quota = quota
       @valid_until_block = valid_until_block
       @data = data

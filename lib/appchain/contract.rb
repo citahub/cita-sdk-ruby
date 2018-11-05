@@ -40,7 +40,7 @@ module AppChain
     # @param tx [Hash] see rpc `call` doc for more info
     #
     # @return [any]
-    def call_func(method:, params: [], tx: {})
+    def call_func(method:, params: [], tx: {}) # rubocop:disable Naming/UncommunicativeMethodParamName
       data, output_types = function_data_with_ot(method, *params)
       resp = @rpc.call_rpc(:call, params: [tx.merge(data: data, to: address), "latest"])
       result = resp["result"]
@@ -60,7 +60,7 @@ module AppChain
     # @param *params [Array] your params
     #
     # @return [nil | Hash] {hash: "", status: ""}, sendRawTransactionResult
-    def send_func(tx:, private_key:, method:, params: [])
+    def send_func(tx:, private_key:, method:, params: []) # rubocop:disable Naming/UncommunicativeMethodParamName
       data, _output_types = function_data_with_ot(method, *params)
       transaction = if tx.is_a?(Hash)
                       Transaction.from_hash(tx)
