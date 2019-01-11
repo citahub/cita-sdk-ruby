@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AppChain
+module CITA
   class Address
     # @param str [String]
     def initialize(str)
@@ -16,7 +16,7 @@ module AppChain
 
     # compare address is equal
     #
-    # @param other [AppChain::Address]
+    # @param other [CITA::Address]
     def ==(other)
       addr.casecmp(other.addr)
     end

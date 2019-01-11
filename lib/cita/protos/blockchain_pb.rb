@@ -92,7 +92,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   end
 end
 
-module AppChain::Protos
+module CITA::Protos
   Proof = Google::Protobuf::DescriptorPool.generated_pool.lookup("Proof").msgclass
   BlockHeader = Google::Protobuf::DescriptorPool.generated_pool.lookup("BlockHeader").msgclass
   Status = Google::Protobuf::DescriptorPool.generated_pool.lookup("Status").msgclass

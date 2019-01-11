@@ -1,17 +1,17 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "appchain/version"
+require "cita/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "appchain.rb"
-  spec.version       = AppChain::VERSION
+  spec.name          = "cita-sdk-ruby"
+  spec.version       = CITA::VERSION
   spec.authors       = ["classicalliu"]
   spec.email         = ["classicalliu@gmail.com"]
 
-  spec.summary       = %q{Ruby Nervos AppChain SDK}
-  spec.description   = %q{Ruby Nervos AppChain SDK for signature and rpc call}
-  spec.homepage      = "https://github.com/cryptape/appchain.rb"
+  spec.summary       = %q{Ruby CITA SDK}
+  spec.description   = %q{Ruby CITA SDK for signature and rpc call}
+  spec.homepage      = "https://github.com/cryptape/cita-sdk-ruby"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

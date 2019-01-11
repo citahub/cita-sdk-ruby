@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AppChain
+module CITA
   class Client
     attr_reader :url, :rpc, :http, :contract
 

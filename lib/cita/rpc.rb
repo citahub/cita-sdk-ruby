@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "active_support/inflector"
 
-module AppChain
+module CITA
   class RPC
     attr_reader :url, :http
 
@@ -53,7 +53,7 @@ module AppChain
       JSON.parse(resp.body)
     end
 
-    # @param transaction [AppChain::Transaction]
+    # @param transaction [CITA::Transaction]
     # @return [Hash]
     def send_transaction(transaction, private_key)
       content = TransactionSigner.encode(transaction, private_key)
