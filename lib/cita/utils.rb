@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AppChain
+module CITA
   class Utils
     HEX_PREFIX = "0x"
 
@@ -56,7 +56,7 @@ module AppChain
       # @param str [String] normal string
       # @return [String] byte code string
       def to_bytes(str)
-        [AppChain::Utils.remove_hex_prefix(str)].pack("H*")
+        [CITA::Utils.remove_hex_prefix(str)].pack("H*")
       end
 
       # byte code to string value, with `0x` prefix
@@ -65,7 +65,7 @@ module AppChain
       # @return [String] normal string
       def from_bytes(bytes_str)
         hex = bytes_str.unpack1("H*")
-        return AppChain::Utils.add_hex_prefix(hex) unless hex.blank?
+        return CITA::Utils.add_hex_prefix(hex) unless hex.blank?
 
         hex
       end
