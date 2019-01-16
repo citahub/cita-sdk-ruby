@@ -81,12 +81,17 @@ response = contract.send_func(tx: tx, private_key: private_key, method: :transfe
 
 * supports CITA 0.19
 
-### 0.2
+### v0.2
  
 * supports CITA 0.20 and 0.19
 * set default transaction version to 1
 * update TransactionSinger.decode output type to hash with symbol keys
-* parse TransactionSinger.decode hash value to hex string if it's bytes. 
+* parse TransactionSinger.decode hash value to hex string if it's bytes.
+
+### v0.20.0
+
+* rename to `cita-sdk-ruby`
+* rename top module name to `CITA`
 
 ## Contributing
 
