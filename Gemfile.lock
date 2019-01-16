@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cita-sdk-ruby (0.2.0)
+    cita-sdk-ruby (0.20.0)
       activesupport (~> 5.2.1)
       ciri-crypto (= 0.1.1)
       faraday (~> 0.15.3)
