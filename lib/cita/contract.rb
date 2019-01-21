@@ -2,7 +2,7 @@
 
 require "web3/eth"
 
-module AppChain
+module CITA
   class Contract
     include Web3::Eth::Abi::AbiCoder
 
@@ -11,7 +11,7 @@ module AppChain
     # @param abi [String | Hash] json string or hash
     # @param url [String] chain url
     # @param address [String] contract address
-    # @param rpc [AppChain::RPC]
+    # @param rpc [CITA::RPC]
     #
     # @return [void]
     def initialize(abi, url, address = nil, rpc = nil)
@@ -54,7 +54,7 @@ module AppChain
 
     # call contract functions by sendRawTransaction
     #
-    # @param tx [Hash | AppChain::Transaction]
+    # @param tx [Hash | CITA::Transaction]
     # @param private_key [String] hex string
     # @param method [Symbol | String] method name you call
     # @param *params [Array] your params

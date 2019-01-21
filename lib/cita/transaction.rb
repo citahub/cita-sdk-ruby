@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require "active_support/core_ext/string"
 
-module AppChain
+module CITA
   class Transaction
     class VersionError < StandardError
     end

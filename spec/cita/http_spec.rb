@@ -1,6 +1,6 @@
-RSpec.describe AppChain::Http do
+RSpec.describe CITA::Http do
   let(:url) { "http://www.example.com" }
-  let(:http) { AppChain::Http.new(url) }
+  let(:http) { CITA::Http.new(url) }
 
   def change_hash_keys(hash, method = :to_s)
     hash.map(&-> (k, v) { {k.send(method) => v} }).reduce({}, :merge)
@@ -19,10 +19,10 @@ RSpec.describe AppChain::Http do
     let(:params) { ["0x0"] }
     let(:default_params) do
       {
-        jsonrpc: AppChain::Http::DEFAULT_JSONRPC,
-        id: AppChain::Http::DEFAULT_ID,
+        jsonrpc: CITA::Http::DEFAULT_JSONRPC,
+        id: CITA::Http::DEFAULT_ID,
         method: method,
-        params: AppChain::Http::DEFAULT_PARAMS
+        params: CITA::Http::DEFAULT_PARAMS
       }
     end
 

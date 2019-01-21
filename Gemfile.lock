@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    appchain.rb (0.2.0)
+    cita-sdk-ruby (0.20.0)
       activesupport (~> 5.2.1)
       ciri-crypto (= 0.1.1)
       faraday (~> 0.15.3)
@@ -83,9 +83,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  appchain.rb!
   awesome_print (~> 1.8)
   bundler (~> 1.16)
+  cita-sdk-ruby!
   pry (~> 0.11)
   rake (~> 10.0)
   rspec (~> 3.0)

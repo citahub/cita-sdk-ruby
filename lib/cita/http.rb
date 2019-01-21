@@ -2,7 +2,7 @@
 require "json"
 require "faraday"
 
-module AppChain
+module CITA
   class Http
     attr_accessor :url
 
@@ -43,7 +43,7 @@ module AppChain
       }.to_json
     end
 
-    # wrapper faraday object with AppChain URL and Content-Type
+    # wrapper faraday object with CITA URL and Content-Type
     #
     # @return [Faraday]
     def conn

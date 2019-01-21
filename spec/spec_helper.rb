@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "appchain"
+require "cita"
 require "awesome_print"
 require "pry"
 
