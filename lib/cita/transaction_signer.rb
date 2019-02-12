@@ -45,13 +45,11 @@ module CITA
         CITA::Utils.from_bytes(encoded_unverified_tx)
       end
 
-      # unsign transaction
+      # get sender info (from address & public key)
       #
-      # @param tx_content [String] hex string
-      def simple_decode(tx_content)
-        content_bytes = CITA::Utils.to_bytes(tx_content)
-        unverified_transaction = Protos::UnverifiedTransaction.decode(content_bytes)
-
+      # @param unverified_transaction [Hash]
+      # @return [Hash] address & public_key
+      def sender_info(unverified_transaction)
         signature = unverified_transaction["signature"]
 
         transaction = unverified_transaction["transaction"]
@@ -63,23 +61,40 @@ module CITA
         from_address = Utils.keccak256(pubkey[1..-1])[-20..-1]
         from_address_hex = Utils.from_bytes(from_address)
 
-        sender = {
+        {
           address: from_address_hex,
           public_key: pubkey_hex
         }
+      end
 
-        {
-          unverified_transaction: unverified_transaction.to_h,
-          sender: sender
+      # decode transaction, CITA v0.21 returns the `from` address in `getTransaction` RPC call
+      # so you can not to recover `from` address from context
+      #
+      # @param tx_content [String] hex string
+      # @param recover [Boolean] set to false if you don't want to recover from address, default is true
+      def simple_decode(tx_content, recover: true)
+        content_bytes = CITA::Utils.to_bytes(tx_content)
+        unverified_transaction = Protos::UnverifiedTransaction.decode(content_bytes)
+
+        info = {
+          unverified_transaction: unverified_transaction.to_h
         }
+
+        if recover
+          sender = sender_info(unverified_transaction)
+          info[:sender] = sender
+        end
+
+        info
       end
 
       # decode and support forks
       #
       # @param tx_content [String] hex string
+      # @param recover [Boolean] set to false if you don't want to recover from address, default is true
       # @return [Hash]
-      def original_decode(tx_content)
-        data = simple_decode(tx_content)
+      def original_decode(tx_content, recover: true)
+        data = simple_decode(tx_content, recover: recover)
         utx = data[:unverified_transaction]
         tx = utx[:transaction]
         version = tx[:version]
@@ -100,9 +115,10 @@ module CITA
       # decode and parse bytes to hex string
       #
       # @param tx_content [String] hex string
+      # @param recover [Boolean] set to false if you don't want to recover from address, default is true
       # @return [Hash]
-      def decode(tx_content)
-        data = original_decode(tx_content)
+      def decode(tx_content, recover: true)
+        data = original_decode(tx_content, recover: recover)
         utx = data[:unverified_transaction]
         tx = utx[:transaction]
         version = tx[:version]

@@ -54,6 +54,8 @@ content = CITA::TransactionSigner.encode(transaction, "you private key")
 
 # you can unsign content by `decode` method
 CITA::TransactionSigner.decode(content) 
+# you can set `recover` to false if you don't want to recover from address and public key
+CITA::TransactionSigner.decode(content, recover: false)
 ```
 
 send transaction
@@ -63,7 +65,7 @@ cita.rpc.send_transaction(transaction, private_key)
 
 transfer tokens
 ```ruby
-cita.rpc.transfer(to: "to address", value: 1000, private_key)
+cita.rpc.transfer(to: "to address", value: 1000, private_key: "your private key")
 ```
 
 contract
@@ -92,6 +94,9 @@ response = contract.send_func(tx: tx, private_key: private_key, method: :transfe
 
 * rename to `cita-sdk-ruby`
 * rename top module name to `CITA`
+
+### v0.21.0
+* add `recover` option for decode transaction, for CITA v0.21 provide `from` in `getTransaction` rpc call
 
 ## Contributing
 
