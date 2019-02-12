@@ -90,6 +90,14 @@ RSpec.describe CITA::TransactionSigner do
       expect(data[:sender]).to eq expect_data[:sender]
     end
 
+    it "original decode without recover" do
+      data = CITA::TransactionSigner.original_decode(content, recover: false)
+
+      expect(data[:unverified_transaction][:transaction]).to eq expect_data[:unverified_transaction][:transaction]
+      expect(data[:unverified_transaction][:crypto]).to eq expect_data[:unverified_transaction][:crypto]
+      expect(data[:sender]).to be nil
+    end
+
     it "decode" do
       output = CITA::TransactionSigner.decode(content)
       utx = output[:unverified_transaction]
@@ -99,6 +107,18 @@ RSpec.describe CITA::TransactionSigner do
       expect(tx[:data]).to eq "0x#{data}"
       expect(tx[:value]).to eq "0x#{expect_data[:unverified_transaction][:transaction][:value].unpack1("H*")}"
       expect(utx[:signature]).to eq "0x#{expect_data[:unverified_transaction][:signature].unpack1("H*")}"
+    end
+
+    it "decode without recover" do
+      output = CITA::TransactionSigner.decode(content, recover: false)
+      utx = output[:unverified_transaction]
+      tx = utx[:transaction]
+
+      expect(tx[:to]).to eq ""
+      expect(tx[:data]).to eq "0x#{data}"
+      expect(tx[:value]).to eq "0x#{expect_data[:unverified_transaction][:transaction][:value].unpack1("H*")}"
+      expect(utx[:signature]).to eq "0x#{expect_data[:unverified_transaction][:signature].unpack1("H*")}"
+      expect(output[:sender]).to be nil
     end
   end
 
@@ -233,6 +253,14 @@ RSpec.describe CITA::TransactionSigner do
           expect(data[:unverified_transaction][:transaction].to_h).to eq expected_data[:unverified_transaction][:transaction]
           expect(data[:unverified_transaction][:crypto]).to eq expected_data[:unverified_transaction][:crypto]
           expect(data[:sender]).to eq expected_data[:sender]
+        end
+
+        it "original decode without recover" do
+          data = CITA::TransactionSigner.original_decode(content, recover: false)
+
+          expect(data[:unverified_transaction][:transaction].to_h).to eq expected_data[:unverified_transaction][:transaction]
+          expect(data[:unverified_transaction][:crypto]).to eq expected_data[:unverified_transaction][:crypto]
+          expect(data[:sender]).to be nil
         end
 
         it "decode" do
