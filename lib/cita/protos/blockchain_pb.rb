@@ -61,10 +61,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_message "BlockBody" do
     repeated :transactions, :message, 1, "SignedTransaction"
   end
+  add_message "CompactBlockBody" do
+    repeated :tx_hashes, :bytes, 1
+  end
   add_message "Block" do
     optional :version, :uint32, 1
     optional :header, :message, 2, "BlockHeader"
     optional :body, :message, 3, "BlockBody"
+  end
+  add_message "CompactBlock" do
+    optional :version, :uint32, 1
+    optional :header, :message, 2, "BlockHeader"
+    optional :body, :message, 3, "CompactBlockBody"
   end
   add_message "BlockWithProof" do
     optional :blk, :message, 1, "Block"
@@ -87,8 +95,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     value :Bft, 2
   end
   add_enum "Crypto" do
-    value :SECP, 0
-    value :SM2, 1
+    value :DEFAULT, 0
+    value :RESERVED, 1
   end
 end
 
@@ -102,7 +110,9 @@ module CITA::Protos
   UnverifiedTransaction = Google::Protobuf::DescriptorPool.generated_pool.lookup("UnverifiedTransaction").msgclass
   SignedTransaction = Google::Protobuf::DescriptorPool.generated_pool.lookup("SignedTransaction").msgclass
   BlockBody = Google::Protobuf::DescriptorPool.generated_pool.lookup("BlockBody").msgclass
+  CompactBlockBody = Google::Protobuf::DescriptorPool.generated_pool.lookup("CompactBlockBody").msgclass
   Block = Google::Protobuf::DescriptorPool.generated_pool.lookup("Block").msgclass
+  CompactBlock = Google::Protobuf::DescriptorPool.generated_pool.lookup("CompactBlock").msgclass
   BlockWithProof = Google::Protobuf::DescriptorPool.generated_pool.lookup("BlockWithProof").msgclass
   BlockTxs = Google::Protobuf::DescriptorPool.generated_pool.lookup("BlockTxs").msgclass
   BlackList = Google::Protobuf::DescriptorPool.generated_pool.lookup("BlackList").msgclass

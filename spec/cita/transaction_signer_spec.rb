@@ -73,7 +73,7 @@ RSpec.describe CITA::TransactionSigner do
             version: 0
           },
           signature: "\xC7\xB5\x1F+cJ+\xB6\xAC\xB0\x95j\x11\xF7\x18\x89\xA8\x8CK\xBA\xC2\t\x8B9\xBC<\\\x0E\x15\eE\x93\x12\x17\xC0\xD1\xE3\f\e\xEC\x87.a\x92s\x000\x98\xE4S3,\x89i\v\x06p\xFB\x02\xA3ZS\x80\x8E\x00",
-          crypto: :SECP
+          crypto: :DEFAULT
         },
         sender: {
           address: "0x46a23e25df9a0f6c18729dda9ad1af3b6a131160",
@@ -90,6 +90,14 @@ RSpec.describe CITA::TransactionSigner do
       expect(data[:sender]).to eq expect_data[:sender]
     end
 
+    it "original decode without recover" do
+      data = CITA::TransactionSigner.original_decode(content, recover: false)
+
+      expect(data[:unverified_transaction][:transaction]).to eq expect_data[:unverified_transaction][:transaction]
+      expect(data[:unverified_transaction][:crypto]).to eq expect_data[:unverified_transaction][:crypto]
+      expect(data[:sender]).to be nil
+    end
+
     it "decode" do
       output = CITA::TransactionSigner.decode(content)
       utx = output[:unverified_transaction]
@@ -99,6 +107,18 @@ RSpec.describe CITA::TransactionSigner do
       expect(tx[:data]).to eq "0x#{data}"
       expect(tx[:value]).to eq "0x#{expect_data[:unverified_transaction][:transaction][:value].unpack1("H*")}"
       expect(utx[:signature]).to eq "0x#{expect_data[:unverified_transaction][:signature].unpack1("H*")}"
+    end
+
+    it "decode without recover" do
+      output = CITA::TransactionSigner.decode(content, recover: false)
+      utx = output[:unverified_transaction]
+      tx = utx[:transaction]
+
+      expect(tx[:to]).to eq ""
+      expect(tx[:data]).to eq "0x#{data}"
+      expect(tx[:value]).to eq "0x#{expect_data[:unverified_transaction][:transaction][:value].unpack1("H*")}"
+      expect(utx[:signature]).to eq "0x#{expect_data[:unverified_transaction][:signature].unpack1("H*")}"
+      expect(output[:sender]).to be nil
     end
   end
 
@@ -172,7 +192,7 @@ RSpec.describe CITA::TransactionSigner do
                 version: 0,
               },
               signature: "+\x87Go\x12\x7F\x19\xE9\x1A]\xE9\"\x85P\xAE\x14va-\x9D*\x1C\xE9\xC6;\x96G\xB4\xDDH\x94.\x17\x10\x15\x88\xF30\x1A\xAD\x8Fj5}\x0E\xEED\x18s\xC0\xFC8Bv\xCD\x1F\xF6\xD9\xF76u\x9A[\x1D\x00",
-              crypto: :SECP
+              crypto: :DEFAULT
             },
             sender: {
               address: "0x4b5ae4567ad5d9fb92bc9afd6a657e6fa13a2523",
@@ -218,7 +238,7 @@ RSpec.describe CITA::TransactionSigner do
                 version: 1
               },
               signature: "\xF0\xAA\x9D\xDA\xAD\x8F\x05i\x89\x10\xDEz\xB4\f\r\e\xD2\xF5\x10\x98\x8AM%\x81\xFD\x00\xA6\x94\x8B\xEFB,x}0\xFD\xBF\xDE\x1E\xC7\xFD\x10\xEB}k\x82lXd\xB8\xD1\xBD\x9EL\xF8p\"\x82N+\x9A%\xE6a\x00",
-              crypto: :SECP
+              crypto: :DEFAULT
             },
             sender: {
               address: "0x4b5ae4567ad5d9fb92bc9afd6a657e6fa13a2523",
@@ -233,6 +253,14 @@ RSpec.describe CITA::TransactionSigner do
           expect(data[:unverified_transaction][:transaction].to_h).to eq expected_data[:unverified_transaction][:transaction]
           expect(data[:unverified_transaction][:crypto]).to eq expected_data[:unverified_transaction][:crypto]
           expect(data[:sender]).to eq expected_data[:sender]
+        end
+
+        it "original decode without recover" do
+          data = CITA::TransactionSigner.original_decode(content, recover: false)
+
+          expect(data[:unverified_transaction][:transaction].to_h).to eq expected_data[:unverified_transaction][:transaction]
+          expect(data[:unverified_transaction][:crypto]).to eq expected_data[:unverified_transaction][:crypto]
+          expect(data[:sender]).to be nil
         end
 
         it "decode" do
