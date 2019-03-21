@@ -96,8 +96,13 @@ response = contract.send_func(tx: tx, private_key: private_key, method: :transfe
 * rename top module name to `CITA`
 
 ### v0.21.0
+
 * add `recover` option for decode transaction, for CITA v0.21 provide `from` in `getTransaction` rpc call
 * rename protobuf `Crypto` enum
+
+### v0.22.0
+
+* support CITA v0.22
 
 ## Contributing
 
