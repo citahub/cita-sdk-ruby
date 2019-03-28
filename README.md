@@ -79,30 +79,30 @@ response = contract.send_func(tx: tx, private_key: private_key, method: :transfe
 
 ## CHANGELOG
 
-### v0.1
+### v0.22.0
 
-* supports CITA 0.19
-
-### v0.2
- 
-* supports CITA 0.20 and 0.19
-* set default transaction version to 1
-* update TransactionSinger.decode output type to hash with symbol keys
-* parse TransactionSinger.decode hash value to hex string if it's bytes.
-
-### v0.20.0
-
-* rename to `cita-sdk-ruby`
-* rename top module name to `CITA`
+* support CITA v0.22
 
 ### v0.21.0
 
 * add `recover` option for decode transaction, for CITA v0.21 provide `from` in `getTransaction` rpc call
 * rename protobuf `Crypto` enum
 
-### v0.22.0
+### v0.20.0
 
-* support CITA v0.22
+* rename to `cita-sdk-ruby`
+* rename top module name to `CITA`
+
+### v0.2
+
+* supports CITA 0.20 and 0.19
+* set default transaction version to 1
+* update TransactionSinger.decode output type to hash with symbol keys
+* parse TransactionSinger.decode hash value to hex string if it's bytes.
+
+### v0.1
+
+* supports CITA 0.19
 
 ## Contributing
 
