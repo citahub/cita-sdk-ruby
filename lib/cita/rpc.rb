@@ -5,7 +5,7 @@ module CITA
   class RPC
     attr_reader :url, :http
 
-    # CITA v0.18 RPC list
+    # CITA v0.23 RPC list
     METHOD_NAMES = %w(
       peerCount
       blockNumber
@@ -29,6 +29,8 @@ module CITA
       getMetaData
       getBlockHeader
       getStateProof
+      getVersion
+      peersInfo
     ).freeze
 
     def initialize(url)
