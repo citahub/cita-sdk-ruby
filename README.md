@@ -79,6 +79,10 @@ response = contract.send_func(tx: tx, private_key: private_key, method: :transfe
 
 ## CHANGELOG
 
+### v0.23.0
+
+* add `getVersion` and `peersInfo` RPC methods
+
 ### v0.22.0
 
 * support CITA v0.22
