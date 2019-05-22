@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cita-sdk-ruby (0.23.0)
+    cita-sdk-ruby (0.24.0)
       activesupport (~> 5.2.1)
       ciri-crypto (= 0.1.1)
       faraday (~> 0.15.3)
@@ -31,8 +31,8 @@ GEM
     digest-sha3 (1.1.0)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
-    ffi (1.10.0)
-    google-protobuf (3.7.1)
+    ffi (1.11.1)
+    google-protobuf (3.7.1-universal-darwin)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     jaro_winkler (1.5.1)

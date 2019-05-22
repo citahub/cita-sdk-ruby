@@ -170,6 +170,28 @@ RSpec.describe CITA::TransactionSigner do
           expect(result).to eq content
         end
       end
+
+      context "version 2" do
+        let(:tx_hash) do
+          {
+            to: "9018ea8bce5d29e59c2bd1d6a10ca5e5c9e2fc3a",
+            nonce: "3cd9407e421f10195c186959bbed3915",
+            quota: 30000,
+            valid_until_block: 2923215,
+            data: "",
+            value: "0x3e8",
+            chain_id: "1",
+            version: 2
+          }
+        end
+        let(:content) { "0x0a87011220336364393430376534323166313031393563313836393539626265643339313518b0ea0120cfb5b201322000000000000000000000000000000000000000000000000000000000000003e840024a149018ea8bce5d29e59c2bd1d6a10ca5e5c9e2fc3a522000000000000000000000000000000000000000000000000000000000000000011241fab587b114f129991dd38ce09d388e1edff72a1a0d5085a22dd11ee232a6d8ab260c7439196343cab49cddc33aaf8049c28261bfbb1dfc4c2fdf3b3f6e261fe400" }
+
+        it "encode correct" do
+          tx = CITA::Transaction.new(tx_hash)
+          result = CITA::TransactionSigner.encode(tx, private_key)
+          expect(result).to eq content
+        end
+      end
     end
 
     context "decode" do
@@ -238,6 +260,60 @@ RSpec.describe CITA::TransactionSigner do
                 version: 1
               },
               signature: "\xF0\xAA\x9D\xDA\xAD\x8F\x05i\x89\x10\xDEz\xB4\f\r\e\xD2\xF5\x10\x98\x8AM%\x81\xFD\x00\xA6\x94\x8B\xEFB,x}0\xFD\xBF\xDE\x1E\xC7\xFD\x10\xEB}k\x82lXd\xB8\xD1\xBD\x9EL\xF8p\"\x82N+\x9A%\xE6a\x00",
+              crypto: :DEFAULT
+            },
+            sender: {
+              address: "0x4b5ae4567ad5d9fb92bc9afd6a657e6fa13a2523",
+              public_key: "0xd2bdee2f7bbf540e1bef0a081f317bc8d99eb0777e6fd9e30cc1ddc220a17a0c2a18d56b4c1727149a2571a4ad25f1ff58f631c6a4ab3cd518d2fd695313acc2"
+            }
+          }
+        end
+
+        it "original decode" do
+          data = CITA::TransactionSigner.original_decode(content)
+
+          expect(data[:unverified_transaction][:transaction].to_h).to eq expected_data[:unverified_transaction][:transaction]
+          expect(data[:unverified_transaction][:crypto]).to eq expected_data[:unverified_transaction][:crypto]
+          expect(data[:sender]).to eq expected_data[:sender]
+        end
+
+        it "original decode without recover" do
+          data = CITA::TransactionSigner.original_decode(content, recover: false)
+
+          expect(data[:unverified_transaction][:transaction].to_h).to eq expected_data[:unverified_transaction][:transaction]
+          expect(data[:unverified_transaction][:crypto]).to eq expected_data[:unverified_transaction][:crypto]
+          expect(data[:sender]).to be nil
+        end
+
+        it "decode" do
+          output = CITA::TransactionSigner.decode(content)
+          utx = output[:unverified_transaction]
+          tx = utx[:transaction]
+
+          expect(tx[:to]).to eq "0x#{expected_data[:unverified_transaction][:transaction][:to].unpack1("H*")}"
+          expect(tx[:data]).to eq ""
+          expect(tx[:value]).to eq "0x#{expected_data[:unverified_transaction][:transaction][:value].unpack1("H*")}"
+          expect(utx[:signature]).to eq "0x#{expected_data[:unverified_transaction][:signature].unpack1("H*")}"
+        end
+      end
+
+      context "version 2" do
+        let(:content) { "0x0a87011220336364393430376534323166313031393563313836393539626265643339313518b0ea0120cfb5b201322000000000000000000000000000000000000000000000000000000000000003e840024a149018ea8bce5d29e59c2bd1d6a10ca5e5c9e2fc3a522000000000000000000000000000000000000000000000000000000000000000011241fab587b114f129991dd38ce09d388e1edff72a1a0d5085a22dd11ee232a6d8ab260c7439196343cab49cddc33aaf8049c28261bfbb1dfc4c2fdf3b3f6e261fe400" }
+        let(:data) { "" }
+        let(:expected_data) do
+          {
+            unverified_transaction: {
+              transaction: {
+                to: ["9018ea8bce5d29e59c2bd1d6a10ca5e5c9e2fc3a"].pack("H*"),
+                nonce: "3cd9407e421f10195c186959bbed3915",
+                quota: 30000,
+                valid_until_block: 2923215,
+                data: data,
+                value: CITA::TransactionSigner.send(:hex_to_bytes, "0x3e8"),
+                chain_id: CITA::TransactionSigner.send(:hex_to_bytes, "0x1"),
+                version: 2
+              },
+              signature: "\xFA\xB5\x87\xB1\x14\xF1)\x99\x1D\xD3\x8C\xE0\x9D8\x8E\x1E\xDF\xF7*\x1A\rP\x85\xA2-\xD1\x1E\xE22\xA6\xD8\xAB&\ft9\x19cC\xCA\xB4\x9C\xDD\xC3:\xAF\x80I\xC2\x82a\xBF\xBB\x1D\xFCL/\xDF;?n&\x1F\xE4\x00",
               crypto: :DEFAULT
             },
             sender: {
