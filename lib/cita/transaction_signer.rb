@@ -25,7 +25,7 @@ module CITA
         if transaction.version.zero?
           tx.to = to unless to.nil?
           tx.chain_id = transaction.chain_id
-        elsif transaction.version == 1
+        elsif transaction.version == 1 || transaction.version == 2
           tx.to_v1 = Utils.to_bytes(to) unless to.nil?
           tx.chain_id_v1 = hex_to_bytes(transaction.chain_id)
         end
@@ -102,7 +102,7 @@ module CITA
         if version == 0 # rubocop:disable Style/NumericPredicate
           tx.delete(:to_v1)
           tx.delete(:chain_id_v1)
-        elsif version == 1
+        elsif version == 1 || version == 2
           tx[:to] = tx.delete(:to_v1)
           tx[:chain_id] = tx.delete(:chain_id_v1)
         else
@@ -132,7 +132,7 @@ module CITA
           tx.delete(:to_v1)
           tx.delete(:chain_id_v1)
           tx[:to] = Utils.add_prefix_for_not_blank(tx[:to])
-        elsif version == 1
+        elsif version == 1 || version == 2
           tx[:to] = Utils.from_bytes(tx[:to])
           tx[:chain_id] = Utils.from_bytes(tx[:chain_id])
         end
