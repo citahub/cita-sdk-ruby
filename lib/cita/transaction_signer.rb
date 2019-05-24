@@ -106,7 +106,7 @@ module CITA
           tx[:to] = tx.delete(:to_v1)
           tx[:chain_id] = tx.delete(:chain_id_v1)
         else
-          raise Transaction::VersionError, "transaction version error, expected 0 or 1, got #{version}"
+          raise Transaction::VersionError, "transaction version error, expected 0, 1 or 2, got #{version}"
         end
 
         data
