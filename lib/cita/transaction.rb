@@ -18,8 +18,8 @@ module CITA
     # @param quota [Integer]
     #
     # @return [void]
-    def initialize(valid_until_block:, chain_id:, nonce: nil, version: 1, to: nil, data: nil, value: "0", quota: 1_000_000) # rubocop:disable Metrics/ParameterLists
-      raise VersionError, "transaction version error, expected 0 or 1, got #{version}" unless [0, 1].include?(version)
+    def initialize(valid_until_block:, chain_id:, nonce: nil, version: 1, to: nil, data: nil, value: "2", quota: 1_000_000) # rubocop:disable Metrics/ParameterLists
+      raise VersionError, "transaction version error, expected 0, 1 or 2, got #{version}" unless [0, 1, 2].include?(version)
 
       @to = to
       @nonce = nonce.blank? ? SecureRandom.hex : nonce

@@ -43,5 +43,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "ciri-crypto", "0.1.1"
   spec.add_dependency "faraday", "~> 0.15.3"
   spec.add_dependency "activesupport", "~> 5.2.1"
-  spec.add_dependency "web3-eth", "~> 0.2.16"
+  spec.add_dependency "web3-eth", "0.2.18"
 end

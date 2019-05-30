@@ -79,6 +79,11 @@ response = contract.send_func(tx: tx, private_key: private_key, method: :transfe
 
 ## CHANGELOG
 
+### v0.24.0
+
+* support transaction version = 2
+* set default transaction version to 2
+
 ### v0.23.0
 
 * add `getVersion` and `peersInfo` RPC methods
