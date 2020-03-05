@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = %q{Ruby CITA SDK}
   spec.description   = %q{Ruby CITA SDK for signature and rpc call}
-  spec.homepage      = "https://github.com/cryptape/cita-sdk-ruby"
+  spec.homepage      = "https://github.com/citahub/cita-sdk-ruby"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'

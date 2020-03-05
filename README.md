@@ -1,7 +1,9 @@
 # cita-sdk-ruby
 
-[![Build Status](https://travis-ci.org/cryptape/cita-sdk-ruby.svg?branch=master)](https://travis-ci.org/cryptape/cita-sdk-ruby)
-[![Documentation](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](https://www.rubydoc.info/github/cryptape/cita-sdk-ruby/master)
+[![Build Status](https://travis-ci.org/citahub/cita-sdk-ruby.svg?branch=master)](https://travis-ci.org/citahub/cita-sdk-ruby)
+[![License: MIT](https://img.shields.io/github/license/citahub/cita-sdk-ruby.svg)](https://github.com/citahub/cita-sdk-ruby/blob/master/LICENSE.txt)
+[![Documentation](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](https://www.rubydoc.info/github/citahub/cita-sdk-ruby/master)
+![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/citahub/cita-sdk-ruby.svg)
 
 CITA Ruby SDK
 
@@ -147,4 +149,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the cita-sdk-ruby project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/cryptape/cita-sdk-ruby/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the cita-sdk-ruby project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/citahub/cita-sdk-ruby/blob/master/CODE_OF_CONDUCT.md).
