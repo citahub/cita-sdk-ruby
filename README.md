@@ -26,6 +26,7 @@ Or install it yourself as:
 See `keccak256`, `to_hex` and other utils methods in `CITA::Utils` module
 
 RPC calls [RPC list](https://docs.nervos.org/cita/#/rpc_guide/rpc)
+
 ```ruby
 cita = CITA::Client.new("your url")
 
@@ -36,6 +37,7 @@ cita.rpc.getBlockByNumber("0x0", true)
 ```
 
 sign and unsign
+
 ```ruby
 # make a Transaction object first
 transaction = CITA::Transaction.new(
@@ -59,16 +61,19 @@ CITA::TransactionSigner.decode(content, recover: false)
 ```
 
 send transaction
+
 ```ruby
 cita.rpc.send_transaction(transaction, private_key)
 ```
 
 transfer tokens
+
 ```ruby
 cita.rpc.transfer(to: "to address", value: 1000, private_key: "your private key")
 ```
 
 contract
+
 ```ruby
 contract = cita.contract_at(abi, contract_address)
 # for RPC call (constant functions)
@@ -77,45 +82,64 @@ response = contract.call_func(method: :symbol)
 response = contract.send_func(tx: tx, private_key: private_key, method: :transfer, params: [address, tokens])
 ```
 
-## CHANGELOG
-
-### v0.24.0
-
-* support transaction version = 2
-* set default transaction version to 2
-
-### v0.23.0
-
-* add `getVersion` and `peersInfo` RPC methods
-
-### v0.22.0
-
-* support CITA v0.22
-
-### v0.21.0
-
-* add `recover` option for decode transaction, for CITA v0.21 provide `from` in `getTransaction` rpc call
-* rename protobuf `Crypto` enum
-
-### v0.20.0
-
-* rename to `cita-sdk-ruby`
-* rename top module name to `CITA`
-
-### v0.2
-
-* supports CITA 0.20 and 0.19
-* set default transaction version to 1
-* update TransactionSinger.decode output type to hash with symbol keys
-* parse TransactionSinger.decode hash value to hex string if it's bytes.
-
-### v0.1
-
-* supports CITA 0.19
-
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/cryptape/cita-sdk-ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+### Bug Report
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/citahub/cita-sdk-ruby. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+### Develop
+
+get source code:
+
+```
+$ git clone git@github.com:citahub/cita-sdk-ruby.git
+```
+
+update submodules, see `.gitmodules`:
+
+```
+$ git submodule update --init --recursive
+```
+
+build secp256k1:
+
+```
+$ cd secp256k1 && ./autogen.sh && ./configure --enable-module-recovery --enable-experimental --enable-module-ecdh && make && make install && cd ..
+```
+
+Run `$ make` to see all available tasks.
+
+### Testing
+
+#### Write test
+
+This project is using [spec](https://github.com/rspec/rspec) as testing framework, find test cases in `spec/` dir.
+
+#### Run test
+
+```
+$ bundle exec rake spec
+```
+
+### Code Quality
+
+* Linter tool: `$ rubocop`
+* Coding Style Guide: TBD
+* Coding Style config: `.rubocop.yml`
+* Code formatter: `$ rubocop -x`
+
+### Collaborate Workflow
+
+* [GitHub Flow](https://help.github.com/en/articles/github-flow), [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)
+* use "develop" for feature/bugfix/refactor 
+* use "master" for release
+
+## Versioning
+
+- format: `vx.y.z`
+- `x.y` Follow the version number of CITA
+- `z` Defined by SDK itself：changed by fixing or adding features
 
 ## License
 
