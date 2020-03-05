@@ -1,7 +1,9 @@
 # cita-sdk-ruby
 
 [![Build Status](https://travis-ci.org/citahub/cita-sdk-ruby.svg?branch=master)](https://travis-ci.org/citahub/cita-sdk-ruby)
+[![License: MIT](https://img.shields.io/github/license/citahub/cita-sdk-ruby.svg)](https://github.com/citahub/cita-sdk-ruby/blob/master/LICENSE.txt)
 [![Documentation](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](https://www.rubydoc.info/github/citahub/cita-sdk-ruby/master)
+![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/citahub/cita-sdk-ruby.svg)
 
 CITA Ruby SDK
 
