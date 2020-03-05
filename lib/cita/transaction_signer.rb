@@ -102,7 +102,7 @@ module CITA
         if version == 0 # rubocop:disable Style/NumericPredicate
           tx.delete(:to_v1)
           tx.delete(:chain_id_v1)
-        elsif version == 1 || version == 2
+        elsif [1, 2].include? version
           tx[:to] = tx.delete(:to_v1)
           tx[:chain_id] = tx.delete(:chain_id_v1)
         else
@@ -132,7 +132,7 @@ module CITA
           tx.delete(:to_v1)
           tx.delete(:chain_id_v1)
           tx[:to] = Utils.add_prefix_for_not_blank(tx[:to])
-        elsif version == 1 || version == 2
+        elsif [1, 2].include? version
           tx[:to] = Utils.from_bytes(tx[:to])
           tx[:chain_id] = Utils.from_bytes(tx[:chain_id])
         end
