@@ -10,6 +10,12 @@ SHELL = /bin/sh
 
 .SILENT: help
 
+# DEFINE FUNCTIONS
+
+define get_current_version
+	sed -nE '/VERSION = /s/(.+)"(.+)"/\2/p' lib/cita/version.rb
+endef
+
 ##@ Helpers
 
 help:  ## Display help message.
@@ -78,3 +84,62 @@ format-ruby-code: ## Run formatter for ruby codes.
 ci: ## Run recipes for CI.
 ci: build test code-quality
 
+
+# receipts for Release
+.PHONY: changelog changelog-check generate-build-version show-full-version
+##@ Release
+changelog-check:
+	# check local branch
+	@git_tags_count=$(shell git log --oneline --decorate | grep "tag:" | wc -l | bc) ; \
+		if [ $${git_tags_count} == 0 ]; then \
+			echo "No git tags found on current branch, please follow these steps:" ;\
+			echo "1. $$ git checkout master" ;\
+			echo "2. $$ git checkout -b update-changelog" ;\
+			echo "3. $$ git merge develop --no-edit" ;\
+			echo "4. $$ make changelog" ;\
+			echo "or just run $$ make changelog-auto" ;\
+			exit 1 ;\
+		fi
+
+changelog: changelog-check ## Generate CHANGELOG.md from git logs.
+	$(info How do I make a good changelog? https://keepachangelog.com)
+	# auto install git-changelog
+	@git-changelog -v || pip3 install git-changelog
+	@OUTPUT=CHANGELOG.md ;\
+		git-changelog -s basic -t keepachangelog -o $${OUTPUT} . ;\
+		git diff $${OUTPUT} ;\
+		open $${OUTPUT} ;\
+		echo "Edit $${OUTPUT} to keep notable changes"
+
+changelog-auto: ## Auto generate CHANGELOG.md
+	$(info Generate CHANGELOG.md in one step)
+	git checkout master
+	if git show-ref --verify --quiet "refs/heads/update-changelog"; then \
+		echo "Found update-changelog, auto delete it." ;\
+		git branch -D update-changelog ;\
+	fi
+	git checkout -b update-changelog
+	git merge develop --no-edit
+	make changelog
+
+make commit-release-notes: ## Commit lib/cita/version.rb and CHANGELOG.md
+	@eval current_version=`$(get_current_version)` ;\
+	git add lib/cita/version.rb CHANGELOG.md ;\
+	git commit -m "bump version to v$${current_version}" ;\
+	git log -n 1
+
+current-version: ## Show current version number in lib/cita/version.rb file
+	@$(call get_current_version)
+
+bump-version: ## Update version number in lib/cita/version.rb file, e.g.: bump-version v=1.2.0
+	$(info Update version number)
+	@eval current_version=`$(get_current_version)` ;\
+	if [ "$${v}" == "" ]; then \
+		echo "usage:$$ make bump-version v=x.y.z" ;\
+	else \
+		echo "Previous version: $${current_version}" ;\
+		echo "Update to new version: $${v}" ;\
+		sed -i '' "s/$${current_version}/$${v}/" lib/cita/version.rb ;\
+		new_version=`make current-version` ;\
+		echo "Now current version: $${new_version}" ;\
+	fi
