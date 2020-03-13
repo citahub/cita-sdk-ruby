@@ -1,5 +1,14 @@
 # CHANGELOG
 
+### v20.2.0
+
+* change version naming style to `YY.MM.X` since CITA has changed it's version naming rule(https://github.com/citahub/cita/releases/tag/v20.2.0)
+* add Makefile and update README, move changelog to CHANGELOG.md
+* Bump rake from 10.5.0 to 12.3.3 fixes security vulnerability CVE-2020-8130
+* migrate repo to citahub
+* refactor codes with suggestion from make lint-ruby-code
+
+
 ### v0.24.0
 
 * support transaction version = 2
