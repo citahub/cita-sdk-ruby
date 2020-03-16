@@ -6,7 +6,7 @@ AllCops:
   - 'Rakefile'
   - 'Gemfile'
   - 'Gemfile.lock'
-  - 'cita.gemspec'
+  - 'cita-sdk-ruby.gemspec'
   - 'cita-proto/**/*'
   - 'secp256k1/**/*'
   - 'lib/cita/protos/**/*'
